@@ -1,0 +1,15 @@
+
+FROM registry.suse.com/bci/python:3.11
+
+# Install Python and Flask
+RUN pip install Flask psycopg2
+
+# Copy the Flask application
+COPY app.py /app.py
+COPY templates /templates
+
+# Expose the port Flask is running on
+EXPOSE 5000
+
+# Run the Flask app
+CMD ["flask", "run", "--host=0.0.0.0"]

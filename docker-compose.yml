@@ -1,0 +1,19 @@
+
+version: '3.8'
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    volumes:
+      - ./data/dbase:/data/dbase
+      - ./data/images:/data/images
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db

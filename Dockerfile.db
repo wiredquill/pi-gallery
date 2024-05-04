@@ -1,0 +1,20 @@
+
+FROM registry.suse.com/bci/bci-base:15.5
+
+# Install PostgreSQL
+RUN zypper install -y postgresql-server && \
+    zypper clean -a
+
+# Initialize the database
+USER postgres
+RUN initdb -D /data/dbase
+
+# Setup to run PostgreSQL
+COPY db_setup.sql /docker-entrypoint-initdb.d/
+COPY import_images.py /usr/local/bin/import_images
+
+# Expose the default PostgreSQL port
+EXPOSE 5432
+
+# Set the default command to run PostgreSQL
+CMD ["postgres", "-D", "/data/dbase", "-c", "listen_addresses=*"]
