@@ -1,9 +1,9 @@
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web-server
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: web-server
@@ -14,6 +14,17 @@ spec:
     spec:
       containers:
       - name: web-server
+<<<<<<< Updated upstream
         image: reg.wiredquill.com/py-gallery-web:latest
+=======
+        image: pi-gallery-web
+>>>>>>> Stashed changes
         ports:
         - containerPort: 5000
+        volumeMounts:
+        - name: data-storage
+          mountPath: /data
+      volumes:
+      - name: data-storage
+        persistentVolumeClaim:
+          claimName: data-pvc
