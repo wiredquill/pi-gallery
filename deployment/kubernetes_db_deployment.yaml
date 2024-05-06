@@ -21,7 +21,7 @@ spec:
           mountPath: /data
       containers:
       - name: sqlite-db
-        image: sqlite-db-image
+        image: reg.wiredquill.com/py-gallery-sqlite:latest
         volumeMounts:
         - name: data-storage
           mountPath: /data
