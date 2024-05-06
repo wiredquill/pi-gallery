@@ -1,0 +1,18 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Gallery</title>
+</head>
+<body>
+    <h1>Image Gallery</h1>
+    <div>
+        {% for image in images %}
+        <div>
+            <img src="{{ url_for('static', filename=image.filename) }}" alt="Image">
+            <p>{{ image.filename }} - {{ image.date_taken }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
