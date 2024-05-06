@@ -1,12 +1,10 @@
-
 FROM registry.suse.com/bci/bci-base:15.5
 RUN zypper install -y sqlite3
-WORKDIR /data
+WORKDIR /initdata
 RUN mkdir dbase
-COPY setup_db.sql /data/dbase/
-COPY load_images.sh /data/dbase/
-COPY images /data/images
-RUN sqlite3 /data/dbase/images.db < /data/dbase/setup_db.sql
-RUN chmod +x /data/dbase/load_images.sh
-RUN /data/dbase/load_images.sh
+COPY setup_db.sql /initdata/dbase/
+COPY load_images.sh /initdata/dbase/
+COPY images /initdata/images
+RUN sqlite3 /initdata/dbase/images.db < /initdata/dbase/setup_db.sql
+RUN chmod +x /initdata/dbase/load_images.sh
 CMD tail -f /dev/null
