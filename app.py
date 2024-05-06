@@ -11,7 +11,12 @@ class ImageMetadata(db.Model):
     date_taken = db.Column(db.String(255))
 @app.route('/')
 def index():
-    images = ImageMetadata.query.all()
-    return render_template('gallery.html', images=images)
+    try:
+        images = ImageMetadata.query.all()
+        return render_template('gallery.html', images=images)
+    except Exception as e:
+        app.logger.error(f"Failed to fetch images: {str(e)}")
+        return "Internal Server Error", 500
 if __name__ == '__main__':
     app.run(debug=True)
+
