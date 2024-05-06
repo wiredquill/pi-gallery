@@ -14,11 +14,7 @@ spec:
     spec:
       containers:
       - name: web-server
-<<<<<<< Updated upstream
         image: reg.wiredquill.com/py-gallery-web:latest
-=======
-        image: pi-gallery-web
->>>>>>> Stashed changes
         ports:
         - containerPort: 5000
         volumeMounts:
