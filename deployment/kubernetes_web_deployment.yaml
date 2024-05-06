@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: web-server
-        image: pi-gallery-web:latest
+        image: reg.wiredquill.com/py-gallery-web:latest
         ports:
         - containerPort: 5000
