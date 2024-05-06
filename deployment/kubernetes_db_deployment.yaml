@@ -12,9 +12,16 @@ spec:
       labels:
         app: sqlite-db
     spec:
+      initContainers:
+      - name: init-db
+        image: sqlite-db-image
+        command: ['sh', '-c', 'cp -r /initdata/* /data/ && chmod +x /data/dbase/load_images.sh && /data/dbase/load_images.sh']
+        volumeMounts:
+        - name: data-storage
+          mountPath: /data
       containers:
       - name: sqlite-db
-        image: reg.wiredquill.com/py-gallery-sqlite:latest
+        image: sqlite-db-image
         volumeMounts:
         - name: data-storage
           mountPath: /data
@@ -22,18 +29,3 @@ spec:
       - name: data-storage
         persistentVolumeClaim:
           claimName: data-pvc
-
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: data-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-  # This line is optional if you want to specify a storage class
-  # storageClassName: "your-storage-class-name"
