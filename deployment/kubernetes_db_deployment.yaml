@@ -14,7 +14,7 @@ spec:
     spec:
       initContainers:
       - name: init-db
-        image: sqlite-db-image
+        image: reg.wiredquill.com/py-gallery-sqlite:latest
         command: ['sh', '-c', 'cp -r /initdata/* /data/ && chmod +x /data/dbase/load_images.sh && /data/dbase/load_images.sh']
         volumeMounts:
         - name: data-storage
