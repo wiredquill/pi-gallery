@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: sqlite-db
-        image: pi-gallery-sqlite
+        image: pi-gallery-sqlite:latest
         volumeMounts:
         - name: data-storage
           mountPath: /data
