@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     app: web-server
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - port: 80
     targetPort: 5000
