@@ -1,9 +1,9 @@
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sqlite-db
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: sqlite-db
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: sqlite-db
-        image: sqlite-db-image
+        image: pi-gallery-sqlite
         volumeMounts:
         - name: data-storage
           mountPath: /data
@@ -22,3 +22,18 @@ spec:
       - name: data-storage
         persistentVolumeClaim:
           claimName: data-pvc
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  # This line is optional if you want to specify a storage class
+  # storageClassName: "your-storage-class-name"
