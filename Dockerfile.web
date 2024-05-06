@@ -1,5 +1,6 @@
 
 FROM registry.suse.com/bci/python:3.11
+RUN mkdir /data
 RUN pip install flask flask_sqlalchemy
 COPY app.py /app/
 WORKDIR /app
